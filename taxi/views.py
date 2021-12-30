@@ -473,12 +473,6 @@ def predict_fare(request):
 					hour4,hour5,hour6,hour7,hour8,hour9]
 	res = model_taxi.predict([list_test])[0]
 	res =int(float(res))
-	
-	
-
-
-	
-	
 	return JsonResponse({'result': res})
     
 
