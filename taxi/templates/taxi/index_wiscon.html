@@ -1,0 +1,236 @@
+{% load static %}
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="shortcut icon" type="image/x-icon" href="https://res.cloudinary.com/alexcbs/image/upload/v1546012692/200px-Map_marker_font_awesome.svg_sspu3y.png" async defer/>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    
+    <link href="{% static 'taxi/css/style_wiscon.css' %}" rel="stylesheet" />
+
+    <!-- JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.23.0/moment.min.js" integrity="sha256-VBLiveTKyUZMEzJd6z2mhfxIqz3ZATCuVMawPZGzIfA=" crossorigin="anonymous"></script>
+    <!--<script src="{% static 'js/index_js.js' %}"></script>-->
+
+    <!-- This links to the paid Google Maps Places API, replace the key parameter with your own -->
+     <!--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD8KxFgpLWTj3_gB3v0JdWELYX3S_h50Og&libraries=places&callback=initMap" async defer></script>-->
+
+<!--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAdA3dnPEeRRckl6US1qatONk_UxpZHdSQ&libraries=places&callback=initMap" async defer></script>-->
+    <title>Breast Cancer Wisconsin Diagnostic</title>
+</head>
+
+
+<body>
+    <div class="container-fluid">
+        <h2>Breast Cancer Wisconsin Diagnostic</h2>
+    </div>
+    
+    <div class="row" id="input-row">
+        <div class="col-xs-12 col-sm-4 col-md-3 col-lg-3">
+            <input id="radius_mean" class="controls" type="number" placeholder="radius_mean"></input>
+        </div>
+         <div class="col-xs-12 col-sm-4 col-md-3 col-lg-3">
+            <input id="texture_mean" class="controls" type="number" placeholder="texture_mean"></input>
+        </div>
+        <div class="col-xs-12 col-sm-4 col-md-3 col-lg-3">
+            <input id="perimeter_mean" class="controls" type="number" placeholder="perimeter_mean"></input>
+        </div>
+        <div class="col-xs-12 col-sm-4 col-md-3 col-lg-3">
+            <input id="area_mean" class="controls" type="number" placeholder="area_mean"></input>
+        </div>
+        
+        <div class="col-xs-12 col-sm-4 col-md-3 col-lg-3">
+            <input id="smoothness_mean" class="controls" type="number" placeholder="smoothness_mean"></input>
+        </div>
+        <div class="col-xs-12 col-sm-4 col-md-3 col-lg-3">
+        <input id="compactness_mean" class="controls" type="number" placeholder="compactness_mean"></input>
+        </div>
+        <div class="col-xs-12 col-sm-4 col-md-3 col-lg-3">
+            <input id="concavity_mean" class="controls" type="number" placeholder="concavity_mean"></input>
+        </div>
+        <div class="col-xs-12 col-sm-4 col-md-3 col-lg-3">
+            <input id="concavepoints_mean" class="controls" type="number" placeholder="concavepoints_mean"></input>
+        </div>
+        <div class="col-xs-12 col-sm-4 col-md-3 col-lg-3">
+            <input id="symmetry_mean" class="controls" type="number" placeholder="symmetry_mean"></input>
+        </div>
+        <div class="col-xs-12 col-sm-4 col-md-3 col-lg-3">
+        <input id="fractal_dimension_mean" class="controls" type="number" placeholder="fractal_dimension_mean"></input>
+
+        </div>
+        <div class="col-xs-12 col-sm-4 col-md-3 col-lg-3">
+            <input id="radius_se" class="controls" type="number" placeholder="radius_se"></input>
+        </div>
+        
+        <div class="col-xs-12 col-sm-4 col-md-3 col-lg-3">
+            <input id="texture_se" class="controls" type="number" placeholder="texture_se"></input>
+        </div>
+        <div class="col-xs-12 col-sm-4 col-md-3 col-lg-3">
+            <input id="perimeter_se" class="controls" type="number" placeholder="perimeter_se"></input>
+        </div>
+        <div class="col-xs-12 col-sm-4 col-md-3 col-lg-3">
+            <input id="area_se" class="controls" type="number" placeholder="area_se"></input>
+        </div>
+        <div class="col-xs-12 col-sm-4 col-md-3 col-lg-3">
+            <input id="smoothness_se" class="controls" type="number" placeholder="smoothness_se"></input>
+        </div>
+        <div class="col-xs-12 col-sm-4 col-md-3 col-lg-3">
+            <input id="compactness_se" class="controls" type="number" placeholder="compactness_se"></input>
+        </div>
+
+        <div class="col-xs-12 col-sm-4 col-md-3 col-lg-3">
+            <input id="concavity_se" class="controls" type="number" placeholder="concavity_se"></input>
+        </div>
+
+        <div class="col-xs-12 col-sm-4 col-md-3 col-lg-3">
+            <input id="concavepoints_se" class="controls" type="number" placeholder="concavepoints_se"></input>
+        </div>
+        <div class="col-xs-12 col-sm-4 col-md-3 col-lg-3">
+            <input id="symmetry_se" class="controls" type="number" placeholder="symmetry_se"></input>
+        </div>
+        <div class="col-xs-12 col-sm-4 col-md-3 col-lg-3">
+            <input id="fractal_dimension_se" class="controls" type="number" placeholder="fractal_dimension_se"></input>
+        </div>
+        <div class="col-xs-12 col-sm-4 col-md-3 col-lg-3">
+            <input id="radius_worst" class="controls" type="number" placeholder="radius_worst"></input>
+        </div>
+        <div class="col-xs-12 col-sm-4 col-md-3 col-lg-3">
+            <input id="texture_worst" class="controls" type="number" placeholder="texture_worst"></input>
+        </div>
+        <div class="col-xs-12 col-sm-4 col-md-3 col-lg-3">
+            <input id="perimeter_worst" class="controls" type="number" placeholder="perimeter_worst"></input>
+        </div>
+        <div class="col-xs-12 col-sm-4 col-md-3 col-lg-3">
+            <input id="area_worst" class="controls" type="number" placeholder="area_worst"></input>
+        </div>
+
+        <div class="col-xs-12 col-sm-4 col-md-3 col-lg-3">
+        <input id="smoothness_worst" class="controls" type="number" placeholder="smoothness_worst"></input>
+        </div>
+        <div class="col-xs-12 col-sm-4 col-md-3 col-lg-3">
+        <input id="compactness_worst" class="controls" type="number" placeholder="compactness_worst"></input>
+        </div>
+        <div class="col-xs-12 col-sm-4 col-md-3 col-lg-3">
+            <input id="concavity_worst" class="controls" type="number" placeholder="concavity_worst"></input>
+        </div>
+        <div class="col-xs-12 col-sm-4 col-md-3 col-lg-3">
+        <input id="concavepoints_worst" class="controls" type="number" placeholder="concavepoints_worst"></input>
+        </div>
+        <div class="col-xs-12 col-sm-4 col-md-3 col-lg-3">
+            <input id="symmetry_worst" class="controls" type="number" placeholder="symmetry_worst"></input>
+        </div>
+        <div class="col-xs-12 col-sm-4 col-md-3 col-lg-3">
+    <input id="fractal_dimension_worst" class="controls" type="number" placeholder="fractal_dimension_worst"></input>
+        </div>
+        <div class="col-xs-12  col-sm-6 col-md-2 col-lg-2">
+            <button type="submit" class="controls btn btn-primary" id="get-fare">Predict</button>
+        </div>
+        
+        
+       
+         <!--<div class="to_center">
+            <button type="submit" class="btn btn-primary " id="get-fare">Predict</button>
+        </div>-->
+        <!--<div class="border border-light p-3 mb-4">
+        
+          <div class="text-center">
+            <button type="button" class="btn btn-primary">Predict</button>
+          </div>
+        
+        </div>-->
+    </div>
+    <script type="text/javascript">
+       
+            $("#get-fare").click(function(){
+                
+                $.ajax({
+                    type: "POST",
+                    url:'{% url "predict_cancer" %}',
+
+                    data: {
+                        'radius_mean' : $("#radius_mean").val(),
+                        'texture_mean' : $("#texture_mean").val(),
+                       'perimeter_mean': $("#perimeter_mean").val(),
+                        'area_mean' :$("#area_mean").val(),
+                        'smoothness_mean' : $("#smoothness_mean").val(),
+                        'compactness_mean': $("#compactness_mean").val(),
+                        'concavity_mean': $("#concavity_mean").val(),
+                        'concavepoints_mean' : $("#concavepoints_mean").val(),
+ 
+                        'symmetry_mean' : $("#symmetry_mean").val(),
+                       'fractal_dimension_mean': $("#fractal_dimension_mean").val(),
+                        'radius_se' :$("#radius_se").val(),
+                        'texture_se' : $("#texture_se").val(),
+                        'perimeter_se': $("#perimeter_se").val(),
+                        'area_se': $("#area_se").val(),
+                        'smoothness_se': $("#smoothness_se").val(),
+                        'compactness_se' : $("#compactness_se").val(),
+                        'concavity_se' : $("#concavity_se").val(),
+                       'concavepoints_se': $("#concavepoints_se").val(),
+                        'symmetry_se' :$("#symmetry_se").val(),
+                        'fractal_dimension_se' : $("#fractal_dimension_se").val(),
+                        'radius_worst': $("#radius_worst").val(),
+                        'texture_worst': $("#texture_worst").val(),
+                        'perimeter_worst' : $("#perimeter_worst").val(),
+                        'area_worst': $("#area_worst").val(),
+                        'smoothness_worst' :$("#smoothness_worst").val(),
+                        'compactness_worst' : $("#compactness_worst").val(),
+                        'concavity_worst': $("#concavity_worst").val(),
+                        'concavepoints_worst': $("#concavepoints_worst").val(),
+                        'symmetry_worst': $("#symmetry_worst").val(),
+                        'fractal_dimension_worst' : $("#fractal_dimension_worst").val(),
+                    
+                        csrfmiddlewaretoken: '{{ csrf_token }}'
+
+                    //csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
+                    
+                },
+                    //csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
+                    //action: 'post',
+                    success: function(json){
+                        //document.getElementById("result").innerHTML = json['result']
+                        $('#price').text(json['result'])
+
+                    
+                        
+                    }
+            
+                
+                
+
+                 })
+                 
+                });
+
+                
+            
+       
+       </script>
+
+
+           
+    <div id="price-wrapper">
+        <div class="alert alert-primary" role="alert" id="price"></div>
+        <!--<button onclick="location.reload()">Reload</button>-->
+    </div>
+    <!--<div id="map"></div>-->
+    <!--<img class="image_pima " src="{% static 'img/wiscon.png'%}" alt="" />-->
+
+    
+
+
+
+
+
+
+    
+</body>
+
+</html>

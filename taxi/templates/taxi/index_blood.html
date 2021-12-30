@@ -1,0 +1,123 @@
+{% load static %}
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="shortcut icon" type="image/x-icon" href="https://res.cloudinary.com/alexcbs/image/upload/v1546012692/200px-Map_marker_font_awesome.svg_sspu3y.png" async defer/>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    
+    <link href="{% static 'taxi/css/style_blood.css' %}" rel="stylesheet" />
+
+    <!-- JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.23.0/moment.min.js" integrity="sha256-VBLiveTKyUZMEzJd6z2mhfxIqz3ZATCuVMawPZGzIfA=" crossorigin="anonymous"></script>
+    <!--<script src="{% static 'js/index_js.js' %}"></script>-->
+
+    <!-- This links to the paid Google Maps Places API, replace the key parameter with your own -->
+     <!--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD8KxFgpLWTj3_gB3v0JdWELYX3S_h50Og&libraries=places&callback=initMap" async defer></script>-->
+
+<!--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAdA3dnPEeRRckl6US1qatONk_UxpZHdSQ&libraries=places&callback=initMap" async defer></script>-->
+    <title>Blood Donation Prediction</title>
+</head>
+
+
+<body>
+    <div class="container-fluid">
+        <h2>Blood Donation Prediction</h2>
+    </div>
+    
+    <div class="row" id="input-row">
+         <div class="col-xs-12 col-sm-4 col-md-3 col-lg-3">
+            <input id="Months_since_Last_Donation" class="controls" type="number" placeholder="Months_since_Last_Donation"></input>
+        </div>
+        <div class="col-xs-12 col-sm-4 col-md-3 col-lg-3">
+        <input id="Number_donations" class="controls" type="number" placeholder="Number_donations"></input>
+        </div>
+        <div class="col-xs-12 col-sm-4 col-md-3 col-lg-3">
+<input id="Total_Volume_Donated" class="controls" type="number" placeholder="Total_Volume_Donated"></input>
+        </div>
+        <div class="col-xs-12 col-sm-4 col-md-3 col-lg-3">
+            <input id="Months_since_First_Donation" class="controls" type="number" placeholder="Months_since_First_Donation"></input>
+        </div>
+        
+        
+        <div class="to_center">
+            <button type="submit" class="btn btn-primary " id="get-fare">Predict</button>
+        </div>
+        
+        <!--<div class="border border-light p-3 mb-4">
+        
+          <div class="text-center">
+            <button type="button" class="btn btn-primary">Predict</button>
+          </div>
+        
+        </div>-->
+    </div>
+    <script type="text/javascript">
+       
+            $("#get-fare").click(function(){
+                
+                $.ajax({
+                    type: "POST",
+                    url:'{% url "predict_blood" %}',
+
+                    data: {    
+                        
+                        'Months_since_Last_Donation':$("#Months_since_Last_Donation").val(),
+                        'Number_donations':$("#Number_donations").val(),
+                        'Total_Volume_Donated':$("#Total_Volume_Donated").val(),
+                        'Months_since_First_Donation':$("#Months_since_First_Donation").val(),
+                        csrfmiddlewaretoken: '{{ csrf_token }}'
+
+                    //csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
+                    
+                },
+                    //csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
+                    //action: 'post',
+                    success: function(json){
+                        //document.getElementById("result").innerHTML = json['result']
+                        $('#price').text(json['result'])
+
+                    
+                        
+                    }
+            
+                
+                
+
+                 })
+                 
+                });
+
+                
+            
+       
+       </script>
+
+
+           
+   
+    <!--<div id="map"></div>-->
+     <img class="image_blood" src="{% static 'taxi/img/blood.png'%}" alt="" />
+      <div id="price-wrapper">
+                <div class="alert alert-primary" role="alert" id="price"></div>
+        <!--<button onclick="location.reload()">Reload</button>-->
+        </div>
+
+    
+
+
+
+
+
+
+    
+</body>
+
+</html>
