@@ -1,0 +1,137 @@
+{% load static %}
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="shortcut icon" type="image/x-icon" href="https://res.cloudinary.com/alexcbs/image/upload/v1546012692/200px-Map_marker_font_awesome.svg_sspu3y.png" async defer/>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    
+    <link href="{% static 'taxi/css/style_pima.css' %}" rel="stylesheet" />
+
+    <!-- JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.23.0/moment.min.js" integrity="sha256-VBLiveTKyUZMEzJd6z2mhfxIqz3ZATCuVMawPZGzIfA=" crossorigin="anonymous"></script>
+    <!--<script src="{% static 'js/index_js.js' %}"></script>-->
+
+    <!-- This links to the paid Google Maps Places API, replace the key parameter with your own -->
+     <!--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD8KxFgpLWTj3_gB3v0JdWELYX3S_h50Og&libraries=places&callback=initMap" async defer></script>-->
+
+<!--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAdA3dnPEeRRckl6US1qatONk_UxpZHdSQ&libraries=places&callback=initMap" async defer></script>-->
+    <title>Pima Diabetes Prediction</title>
+</head>
+
+
+<body>
+    <div class="container-fluid">
+        <h2>Predict the onset of diabetes based on diagnostic measures</h2>
+    </div>
+    <div class="row" id="input-row">
+        <div class="col-xs-12 col-sm-4 col-md-3 col-lg-3">
+            <input id="Pregnancies" class="controls" type="number" placeholder=" Pregnancies"></input>
+        </div>
+        <div class="col-xs-12 col-sm-4 col-md-3 col-lg-3">
+            <input id="Glucose" class="controls" type="number" placeholder="Glucose"></input>
+        </div>
+        <div class="col-xs-12 col-sm-4 col-md-3 col-lg-3">
+            <input id="BloodPressure" class="controls" type="number" placeholder="BloodPressure"></input>
+        </div>
+        <div class="col-xs-12 col-sm-4 col-md-3 col-lg-3">
+            <input id="SkinThickness" class="controls" type="number" placeholder="SkinThickness"></input>
+        </div>
+        <div class="col-xs-12 col-sm-4 col-md-3 col-lg-3">
+            <input id="Insulin" class="controls" type="number" placeholder="Insulin"></input>
+        </div>
+        <div class="col-xs-12 col-sm-4 col-md-3 col-lg-3">
+            <input id="BMI" class="controls" type="number" placeholder="BMI"></input>
+        </div>
+        <div class="col-xs-12 col-sm-4 col-md-3 col-lg-3">
+            <input id="DiabetesPedigreeFunction" class="controls" type="number" placeholder="DiabetesPedigreeFunction"></input>
+        </div>
+        <div class="col-xs-12 col-sm-4 col-md-3 col-lg-3">
+            <input id="Age" class="controls" type="number" placeholder="Age"></input>
+        </div>
+        
+       
+         <div class="to_center">
+            <button type="submit" class="btn btn-primary " id="get-fare">Predict</button>
+        </div>
+        <!--<div class="border border-light p-3 mb-4">
+        
+          <div class="text-center">
+            <button type="button" class="btn btn-primary">Predict</button>
+          </div>
+        
+        </div>-->
+    </div>
+    <script type="text/javascript">
+       
+            $("#get-fare").click(function(){
+                
+                $.ajax({
+                    type: "POST",
+                    url:'{% url "predict_diabetes" %}',
+
+                    data: {
+                        
+                        'Pregnancies' : $("#Pregnancies").val(),
+                        'Glucose' : $("#Glucose").val(),
+                       'BloodPressure': $("#BloodPressure").val(),
+                        'SkinThickness' :$("#SkinThickness").val(),
+                        'Insulin' : $("#Insulin").val(),
+                        'BMI': $("#BMI").val(),
+                        'DiabetesPedigreeFunction': $("#DiabetesPedigreeFunction").val(),
+                        'Age': $("#Age").val(),
+                    
+                        csrfmiddlewaretoken: '{{ csrf_token }}'
+
+                    //csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
+                    
+                },
+                    //csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
+                    //action: 'post',
+                    success: function(json){
+                        //document.getElementById("result").innerHTML = json['result']
+                        $('#price').text(json['result'])
+
+                    
+                        
+                    }
+            
+                
+                
+
+                 })
+                 
+                });
+
+                
+            
+       
+       </script>
+
+
+           
+    <div id="price-wrapper">
+        <div class="alert alert-primary" role="alert" id="price"></div>
+        <!--<button onclick="location.reload()">Reload</button>-->
+    </div>
+    <!--<div id="map"></div>-->
+    <img class="img-fluid image_pima " src="{% static 'img/pima.png'%}" alt="" />
+
+    
+
+
+
+
+
+
+    
+</body>
+
+</html>

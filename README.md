@@ -38,24 +38,13 @@ $
 $ # Access the web app in browser: http://127.0.0.1:8000/projets/taxi/
 ```
 
-```bash
-$ # Get the code
-$ git clone https://github.com/Ibmaria/New-York-City-Taxi-Fare-Prediction.git
-$ cd New-York-City-Taxi-Fare-Prediction
-$
-$ # WITH DOCKER
-$ docker build -t imagename .
-$ 
-$
-$
-$ 
-```
+
 
 
 
 <br />
 
-## App Snapshot
+## App Screenshot
 ![App ](https://github.com/Ibmaria/New-York-City-Taxi-Fare-Prediction/blob/master/captureapp.PNG)
 
 ## Download Video App Here
@@ -71,6 +60,7 @@ The project is coded using a simple and intuitive structure presented below:
    |
    |-- taxi/                              
    |--taxidriver/
+   |--Docker-version
    |--classify_image.py                        
    |--Dockerfile              
    |--requirements.txt

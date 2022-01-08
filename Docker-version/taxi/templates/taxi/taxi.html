@@ -1,0 +1,133 @@
+{% load static %}
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="shortcut icon" type="image/x-icon" href="https://res.cloudinary.com/alexcbs/image/upload/v1546012692/200px-Map_marker_font_awesome.svg_sspu3y.png" async defer/>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    
+    <link href="{% static 'taxi/css/taxi.css' %}" rel="stylesheet" />
+
+    <!-- JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.23.0/moment.min.js" integrity="sha256-VBLiveTKyUZMEzJd6z2mhfxIqz3ZATCuVMawPZGzIfA=" crossorigin="anonymous"></script>
+    <script src="{% static 'taxi/js/taxi.js' %}"></script>
+    <!--<script src="{% static 'webhomepage/js/scripts.js' %}"></script>-->
+
+    <!-- This links to the paid Google Maps Places API, replace the key parameter with your own -->
+     <!--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD8KxFgpLWTj3_gB3v0JdWELYX3S_h50Og&libraries=places&callback=initMap" async defer></script>-->
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAdA3dnPEeRRckl6US1qatONk_UxpZHdSQ&libraries=places&callback=initMap" async defer></script>
+    <title>New York taxi Fare Amount Prediction</title>
+</head>
+
+
+<body>
+    <div class="container-fluid">
+        <h2>New York Taxi Fare Amount Prediction</h2>
+    </div>
+    <div class="row" id="input-row">
+        <div class="col-xs-12 col-sm-4 col-md-3 col-lg-3">
+            <input id="pickup-input" class="controls" type="text" placeholder="Depart"></input>
+        </div>
+        <div class="col-xs-12 col-sm-4 col-md-3 col-lg-3">
+            <input id="dropoff-input" class="controls" type="text" placeholder="Arrivée"></input>
+        </div>
+        <div class="col-xs-4  col-sm-4 col-md-2 col-lg-2">
+            <select id="datetime-input" class="controls" type="text">
+                <option value="now" selected>Now</option>
+            </select>
+        </div>
+        <div class="col-xs-4  col-sm-6 col-md-2 col-lg-2">
+            <select id="passenger-input" class="controls" type="text">
+                <option value="1" selected>1 person</option>
+                <option value="2">2 persons</option>
+                <option value="3">3 persons</option>
+                <option value="4">4 persons</option>
+                <option value="5">5 persons</option>
+                <option value="6">6 persons</option>
+            </select>
+        </div>
+        <div class="col-xs-4  col-sm-6 col-md-2 col-lg-2">
+            <button type="submit" class="controls btn btn-primary" id="get-fare">Prix</button>
+        </div>
+    </div>
+    <script type="text/javascript">
+       
+            $("#get-fare").click(function(){
+                var originPlace = originAutocomplete.getPlace();
+                var destinationPlace = destinationAutocomplete.getPlace();
+                if(originPlace != null && destinationPlace != null && originInput.value != "" && destinationInput.value != "") {
+                        if(originPlace.place_id === destinationPlace.place_id) {
+                             window.alert("Pickup and dropoff points are the same.");
+                        } else {
+                var dateTime = $("#datetime-input option:selected").val();
+                var passengerCount = $("#passenger-input option:selected").val();
+                
+                        
+                };
+                $.ajax({
+                    type: "POST",
+                    url:'{% url "predict_fare" %}',
+
+                    data: {
+                    "pickup_datetime": dateTime,
+                        "passenger_count": parseInt(passengerCount),
+                        "pickup_latitude": originPlace.geometry.location.lat(),
+                        "pickup_longitude": originPlace.geometry.location.lng(),
+                        "dropoff_latitude": destinationPlace.geometry.location.lat(),
+                        "dropoff_longitude": destinationPlace.geometry.location.lng(),
+                        csrfmiddlewaretoken: '{{ csrf_token }}'
+
+                    //csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
+                    
+                },
+                    //csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
+                    //action: 'post',
+                    success: function(json){
+                        //document.getElementById("result").innerHTML = json['result']
+                        $('#price').text('$'+json['result'])
+
+                        //$('#result').innerHTML = json['result']
+                        
+                    }
+            
+                
+                
+
+                 })
+                 }else {
+    window.alert("Please fill in pickup and dropoff destination.");
+  };
+                });
+
+                
+            
+       
+       </script>
+
+
+           
+
+    <div id="map"></div>
+
+    <div id="price-wrapper">
+        <div class="alert alert-primary" role="alert" id="price"></div>
+        <!--<button onclick="location.reload()">Reload</button>-->
+    </div>
+
+
+
+
+
+
+    
+</body>
+
+</html>

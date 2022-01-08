@@ -1,0 +1,153 @@
+h2 {
+  text-align: center;
+}
+
+.image_blood{
+   
+  margin-top: 30px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  height: 60%;
+
+
+}
+
+#input-row {
+  padding: 0 !important;
+  margin: 0 !important;
+  width: 100% !important;
+  max-width: 1200px !important;
+}
+
+.controls {
+  margin-top: 10px;
+  border: 1px solid transparent;
+  border-radius: 2px 0 0 2px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  height: 32px !important;
+  outline: none;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+
+}
+.to_center {
+    display: block;
+  margin-left: auto;
+  margin-right: auto; 
+  margin-top: 30px;
+  width: 200px;
+}
+#radius_mean, #texture_mean, #perimeter_mean, #area_mean, #smoothness_mean, #compactness_mean
+{
+  background-color: #fff;
+  font-family: Roboto;
+  font-size: 15px;
+  font-weight: 300;
+  margin-left: 6px;
+  padding: 0 11px 0 11px;
+  text-overflow: ellipsis;
+  width: 100% !important;
+  min-width: 18px ;
+  -webkit-appearance: none !important;
+}
+#radius_mean:focus, #texture_mean:focus, #perimeter_mean:focus, #area_mean:focus, #smoothness_mean:focus, #compactness_mean:focus
+ {
+  border-color: #4d90fe;
+}
+
+
+#concavity_mean,#concavepoints_mean, #symmetry_mean, #fractal_dimension_mean,#radius_se, #texture_se
+{
+  background-color: #fff;
+  font-family: Roboto;
+  font-size: 15px;
+  font-weight: 300;
+  margin-left: 6px;
+  padding: 0 11px 0 11px;
+  text-overflow: ellipsis;
+  width: 100% !important;
+  min-width: 18px ;
+  -webkit-appearance: none !important;
+}
+#concavity_mean:focus,#concavepoints_mean:focus, #symmetry_mean:focus, #fractal_dimension_mean:focus,#radius_se:focus, #texture_se:focus
+{
+  border-color: #4d90fe;
+}
+
+#perimeter_se, #area_se, #smoothness_se,#compactness_se, #concavity_se, #concavepoints_se, #symmetry_se
+{
+  background-color: #fff;
+  font-family: Roboto;
+  font-size: 15px;
+  font-weight: 300;
+  margin-left: 6px;
+  padding: 0 11px 0 11px;
+  text-overflow: ellipsis;
+  width: 100% !important;
+  min-width: 18px ;
+  -webkit-appearance: none !important;
+}
+#perimeter_se:focus, #area_se:focus, #smoothness_se:focus,#compactness_se:focus, #concavity_se:focus, #concavepoints_se:focus, #symmetry_se:focus
+{
+  border-color: #4d90fe;
+}
+#fractal_dimension_se, #radius_worst, #texture_worst,#perimeter_worst, #area_worst
+{
+  background-color: #fff;
+  font-family: Roboto;
+  font-size: 15px;
+  font-weight: 300;
+  margin-left: 6px;
+  padding: 0 11px 0 11px;
+  text-overflow: ellipsis;
+  width: 100% !important;
+  min-width: 18px ;
+  -webkit-appearance: none !important;
+}
+#fractal_dimension_se:focus, #radius_worst:focus, #texture_worst:focus,#perimeter_worst:focus, #area_worst:focus
+{
+  border-color: #4d90fe;
+}
+
+#smoothness_worst,#compactness_worst, #concavity_worst, #concavepoints_worst,#symmetry_worst, #fractal_dimension_worst {
+  background-color: #fff;
+  font-family: Roboto;
+  font-size: 15px;
+  font-weight: 300;
+  margin-left: 6px;
+  padding: 0 11px 0 11px;
+  text-overflow: ellipsis;
+  width: 100% !important;
+  min-width: 18px ;
+  -webkit-appearance: none !important;
+}
+#smoothness_worst:focus,#compactness_worst:focus, #concavity_worst:focus, #concavepoints_worst:focus,#symmetry_worst:focus, #fractal_dimension_worst:focus
+{
+  border-color: #4d90fe;
+}
+#get-fare {
+  font-family: Roboto;
+  font-size: 15px;
+  font-weight: 300;
+  margin-left: 6px;
+  padding: 0 11px 0 11px;
+  width: 100% !important;
+  min-width: 18px ;
+}
+
+
+#price-wrapper {
+  display: block;
+}
+
+#price {
+    text-align: center;
+     margin-top: 25px !important;
+
+    margin-bottom: 8px !important;
+    padding: 8px 8px 8px 8px !important;
+    font-size: 18px;
+    font-weight: bold;
+}

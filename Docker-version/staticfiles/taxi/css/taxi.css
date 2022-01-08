@@ -1,0 +1,66 @@
+h2 {
+  text-align: center;
+}
+
+#map {
+  height: 80%;
+  width: 100%;
+}
+
+
+#input-row {
+  padding: 0 !important;
+  margin: 0 !important;
+  width: 100% !important;
+  max-width: 1200px !important;
+}
+
+.controls {
+  margin-top: 10px;
+  border: 1px solid transparent;
+  border-radius: 2px 0 0 2px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  height: 32px !important;
+  outline: none;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+#pickup-input, #dropoff-input, #datetime-input, #passenger-input {
+  background-color: #fff;
+  font-family: Roboto;
+  font-size: 15px;
+  font-weight: 300;
+  margin-left: 6px;
+  padding: 0 11px 0 11px;
+  text-overflow: ellipsis;
+  width: 100% !important;
+  min-width: 18px ;
+  -webkit-appearance: none !important;
+}
+
+#get-fare {
+  font-family: Roboto;
+  font-size: 15px;
+  font-weight: 300;
+  margin-left: 6px;
+  padding: 0 11px 0 11px;
+  width: 100% !important;
+  min-width: 18px ;
+}
+
+#pickup-input:focus, #dropoff-input:focus {
+  border-color: #4d90fe;
+}
+
+#price-wrapper {
+  display: block;
+}
+
+#price {
+    text-align: center;
+    margin-bottom: 8px !important;
+    padding: 8px 8px 8px 8px !important;
+    font-size: 18px;
+    font-weight: bold;
+}
